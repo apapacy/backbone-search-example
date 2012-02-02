@@ -1,0 +1,22 @@
+CM.Application = Backbone.Router.extend
+  routes:
+    '': 'catchAll'
+
+  initialize: ->
+    @routers = {}
+    @routers.people = new PeopleRouter()
+    @currentPageView = null
+
+  setPageView: (view) ->
+    if !@currentPageView or @currentPageView.cid != view.cid
+      $("#body").html(view.el)
+      @currentPageView = view
+
+  catchAll: ->
+    console.log 'catchAll', arguments
+
+  navigateSearch: (search) ->
+    search.save({}, success: (s) ->
+      @navigate("/searchs/#{s.id}/people", true)
+    )
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>People</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div id="body" class="container">
+    <%= yield %>
+  </div>
+
+  <script>
+    <% if current_search? %>
+    cm.search.set(<%= current_search.to_json(:only => [:id, :q]).html_safe %>);
+    <% end %>
+  </script>
+</body>
+</html>
