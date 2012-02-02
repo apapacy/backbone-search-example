@@ -9,8 +9,14 @@ window.PeopleRouter = Backbone.Router.extend
 
   people: ->
     cm.people.fetch()
-    cm.app.setPageView(@pages.people.render())
+    cm.app.setPageView(@peoplePage())
 
   query: (params) ->
     cm.search.setParams(params)
-    cm.app.setPageView(@pages.people.render())
+    cm.app.setPageView(@peoplePage())
+
+  peoplePage: ->
+    unless @rendered
+      @pages.people.render()
+      @rendered = true
+    @pages.people
